@@ -1,0 +1,1398 @@
+
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ทะเบียนผลิตสื่อและนวัตกรรมการสอน</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --secondary: #fbbf24;
+            --primary-light: #c4b5fd;
+            --secondary-light: #fde68a;
+        }
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f9fafb;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        .btn-primary {
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #7c3aed;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(139, 92, 246, 0.25);
+        }
+        .btn-secondary {
+            background-color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #f59e0b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(251, 191, 36, 0.25);
+        }
+        .btn-danger {
+            background-color: #ef4444;
+            transition: all 0.3s ease;
+        }
+        .btn-danger:hover {
+            background-color: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(239, 68, 68, 0.25);
+        }
+        .btn-info {
+            background-color: #3b82f6;
+            transition: all 0.3s ease;
+        }
+        .btn-info:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.25);
+        }
+        .form-container {
+            background-color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 1rem;
+            border-top: 4px solid var(--primary);
+        }
+        .form-input {
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+        }
+        .form-label {
+            color: #4b5563;
+            font-weight: 500;
+        }
+        .table-header {
+            background-color: var(--primary);
+            color: white;
+        }
+        .table-row:nth-child(even) {
+            background-color: var(--primary-light);
+            background-opacity: 0.1;
+        }
+        .table-row:hover {
+            background-color: var(--secondary-light);
+        }
+        .footer {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+        }
+        .loading-overlay {
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 50;
+        }
+        .spinner {
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .success-message {
+            background-color: #10b981;
+            transform: translateY(-100%);
+            transition: transform 0.5s ease;
+        }
+        .success-message.show {
+            transform: translateY(0);
+        }
+        @media (max-width: 640px) {
+            .form-container {
+                padding: 1rem;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printArea, #printArea * {
+                visibility: visible;
+            }
+            #printArea {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-header {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .print-table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            .print-table th, .print-table td {
+                border: 1px solid #000;
+                padding: 8px;
+            }
+            .print-table th {
+                background-color: #f0f0f0;
+            }
+        }
+        
+        /* Modal styles */
+        .modal {
+            transition: opacity 0.25s ease;
+        }
+        .modal-container {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s ease;
+        }
+        
+        /* Navigation menu */
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+        }
+        
+        /* Tab styles */
+        .tab {
+            transition: all 0.3s ease;
+        }
+        .tab:hover {
+            background-color: var(--primary-light);
+        }
+        .tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Action buttons */
+        .action-btn {
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .action-btn:hover {
+            transform: translateY(-1px);
+        }
+        .edit-btn {
+            background-color: #3b82f6;
+        }
+        .edit-btn:hover {
+            background-color: #2563eb;
+        }
+        .delete-btn {
+            background-color: #ef4444;
+        }
+        .delete-btn:hover {
+            background-color: #dc2626;
+        }
+        .view-btn {
+            background-color: #10b981;
+        }
+        .view-btn:hover {
+            background-color: #059669;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header text-white py-6 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto">
+            <h1 class="text-3xl font-bold text-center">ทะเบียนผลิตสื่อและนวัตกรรมการสอน</h1>
+            <p class="text-center mt-2 text-white text-opacity-90">ระบบบันทึกข้อมูลสื่อและนวัตกรรมการสอน</p>
+            
+            <!-- Navigation Menu -->
+            <nav class="mt-6">
+                <ul class="flex flex-wrap justify-center space-x-1 md:space-x-4">
+                    <li>
+                        <a href="#" class="nav-link active px-4 py-2 rounded-lg inline-block" data-section="form">
+                            บันทึกข้อมูล
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-4 py-2 rounded-lg inline-block" data-section="recent">
+                            ข้อมูลล่าสุด
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-4 py-2 rounded-lg inline-block" data-section="manage">
+                            จัดการข้อมูล
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-4 py-2 rounded-lg inline-block" data-section="reports">
+                            รายงานต่างๆ
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Form Section -->
+        <section id="formSection" class="section-content">
+            <div class="form-container p-6 mb-8">
+                <h2 class="text-2xl font-semibold mb-6 text-gray-800">บันทึกข้อมูลสื่อและนวัตกรรม</h2>
+                
+                <form id="mediaForm" class="space-y-6">
+                    <input type="hidden" id="recordId" name="recordId" value="">
+                    <input type="hidden" id="formMode" name="formMode" value="create">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="date" class="form-label block mb-2">วันที่ผลิต</label>
+                            <input type="date" id="date" name="date" required class="form-input w-full px-4 py-2 rounded-lg" value="">
+                        </div>
+                        
+                        <div>
+                            <label for="name" class="form-label block mb-2">ชื่อสื่อ/นวัตกรรม</label>
+                            <input type="text" id="name" name="name" required class="form-input w-full px-4 py-2 rounded-lg" placeholder="กรุณาระบุชื่อสื่อหรือนวัตกรรม">
+                        </div>
+                        
+                        <div>
+                            <label for="produce" class="form-label block mb-2">ชื่อผู้ผลิต</label>
+                            <input type="text" id="produce" name="produce" required class="form-input w-full px-4 py-2 rounded-lg" placeholder="กรุณาระบุชื่อผู้ผลิต">
+                        </div>
+                        
+                        <div>
+                            <label for="amount" class="form-label block mb-2">จำนวน</label>
+                            <input type="number" id="amount" name="amount" required class="form-input w-full px-4 py-2 rounded-lg" placeholder="กรุณาระบุจำนวน" min="1">
+                        </div>
+                        
+                        <div class="md:col-span-2">
+                            <label for="object" class="form-label block mb-2">จุดประสงค์</label>
+                            <textarea id="object" name="object" required class="form-input w-full px-4 py-2 rounded-lg" rows="3" placeholder="กรุณาระบุจุดประสงค์ของสื่อหรือนวัตกรรม"></textarea>
+                        </div>
+                        
+                        <div>
+                            <label for="name2" class="form-label block mb-2">ผู้รับรอง</label>
+                            <input type="text" id="name2" name="name2" required class="form-input w-full px-4 py-2 rounded-lg" placeholder="กรุณาระบุชื่อผู้รับรอง">
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center pt-4 space-x-4">
+                        <button type="submit" id="submitBtn" class="btn-primary text-white font-medium py-3 px-8 rounded-lg text-lg">
+                            บันทึกข้อมูล
+                        </button>
+                        <button type="button" id="cancelBtn" class="btn-secondary text-white font-medium py-3 px-8 rounded-lg text-lg hidden">
+                            ยกเลิก
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        
+        <!-- Recent Data Section -->
+        <section id="recentSection" class="section-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800">ข้อมูลล่าสุด</h2>
+                    <button id="printReportBtn" class="btn-secondary text-white font-medium py-2 px-4 rounded-lg flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                        </svg>
+                        พิมพ์รายงาน
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead>
+                            <tr class="table-header">
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ที่</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">วันที่ผลิต</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ชื่อสื่อ/นวัตกรรม</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ชื่อผู้ผลิต</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">จำนวน</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ผู้รับรอง</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTable" class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="6">กำลังโหลดข้อมูล...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Manage Data Section (CRUD) -->
+        <section id="manageSection" class="section-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800">จัดการข้อมูล</h2>
+                    <div class="flex space-x-2">
+                        <div class="relative">
+                            <input type="text" id="searchInput" placeholder="ค้นหา..." class="form-input px-4 py-2 rounded-lg pr-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute right-3 top-2.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                        <button id="refreshDataBtn" class="btn-info text-white font-medium py-2 px-4 rounded-lg flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                            รีเฟรช
+                        </button>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead>
+                            <tr class="table-header">
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ที่</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">วันที่ผลิต</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ชื่อสื่อ/นวัตกรรม</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ชื่อผู้ผลิต</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">จำนวน</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ผู้รับรอง</th>
+                                <th class="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="crudTable" class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="7">กำลังโหลดข้อมูล...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="flex justify-between items-center mt-6">
+                    <div class="text-sm text-gray-700">
+                        แสดง <span id="startRecord">0</span> ถึง <span id="endRecord">0</span> จากทั้งหมด <span id="totalRecords">0</span> รายการ
+                    </div>
+                    <div class="flex space-x-2">
+                        <button id="prevPageBtn" class="px-3 py-1 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                            ก่อนหน้า
+                        </button>
+                        <div id="pageNumbers" class="flex space-x-1">
+                            <!-- Page numbers will be inserted here -->
+                        </div>
+                        <button id="nextPageBtn" class="px-3 py-1 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                            ถัดไป
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Reports Section -->
+        <section id="reportsSection" class="section-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h2 class="text-2xl font-semibold mb-6 text-gray-800">รายงานต่างๆ</h2>
+                
+                <!-- Report Tabs -->
+                <div class="border-b border-gray-200 mb-6">
+                    <ul class="flex flex-wrap -mb-px">
+                        <li class="mr-2">
+                            <a href="#" class="tab active inline-block py-2 px-4 rounded-t-lg" data-tab="summary">
+                                สรุปภาพรวม
+                            </a>
+                        </li>
+                        <li class="mr-2">
+                            <a href="#" class="tab inline-block py-2 px-4 rounded-t-lg" data-tab="monthly">
+                                รายงานรายเดือน
+                            </a>
+                        </li>
+                        <li class="mr-2">
+                            <a href="#" class="tab inline-block py-2 px-4 rounded-t-lg" data-tab="producer">
+                                รายงานตามผู้ผลิต
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Summary Report -->
+                <div id="summaryReport" class="tab-content">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <div class="bg-purple-100 p-4 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold text-purple-800 mb-2">จำนวนสื่อทั้งหมด</h3>
+                            <p class="text-3xl font-bold text-purple-600" id="totalMedia">0</p>
+                        </div>
+                        <div class="bg-yellow-100 p-4 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold text-yellow-800 mb-2">จำนวนผู้ผลิต</h3>
+                            <p class="text-3xl font-bold text-yellow-600" id="totalProducers">0</p>
+                        </div>
+                        <div class="bg-green-100 p-4 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold text-green-800 mb-2">จำนวนชิ้นงานรวม</h3>
+                            <p class="text-3xl font-bold text-green-600" id="totalItems">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold mb-4">สื่อที่ผลิตล่าสุด</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead>
+                                    <tr class="table-header">
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">วันที่ผลิต</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ชื่อสื่อ/นวัตกรรม</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ชื่อผู้ผลิต</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">จำนวน</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="latestMediaTable" class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="4">กำลังโหลดข้อมูล...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center">
+                        <button id="printSummaryBtn" class="btn-primary text-white font-medium py-2 px-6 rounded-lg flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                            </svg>
+                            พิมพ์รายงานสรุป
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Monthly Report -->
+                <div id="monthlyReport" class="tab-content hidden">
+                    <div class="mb-6">
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
+                            <div class="flex-1">
+                                <label class="form-label block mb-2">เลือกเดือน</label>
+                                <select id="monthSelect" class="form-input w-full px-4 py-2 rounded-lg">
+                                    <option value="1">มกราคม</option>
+                                    <option value="2">กุมภาพันธ์</option>
+                                    <option value="3">มีนาคม</option>
+                                    <option value="4">เมษายน</option>
+                                    <option value="5">พฤษภาคม</option>
+                                    <option value="6">มิถุนายน</option>
+                                    <option value="7">กรกฎาคม</option>
+                                    <option value="8">สิงหาคม</option>
+                                    <option value="9">กันยายน</option>
+                                    <option value="10">ตุลาคม</option>
+                                    <option value="11">พฤศจิกายน</option>
+                                    <option value="12">ธันวาคม</option>
+                                </select>
+                            </div>
+                            <div class="flex-1">
+                                <label class="form-label block mb-2">เลือกปี</label>
+                                <select id="yearSelect" class="form-input w-full px-4 py-2 rounded-lg">
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                </select>
+                            </div>
+                            <div class="flex-1 flex items-end">
+                                <button id="generateMonthlyBtn" class="btn-primary text-white font-medium py-2 px-4 rounded-lg w-full">
+                                    สร้างรายงาน
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                            <h3 class="text-lg font-semibold text-purple-800 mb-2">สรุปประจำเดือน <span id="monthYearTitle">-</span></h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <p class="text-sm text-gray-600">จำนวนสื่อที่ผลิต:</p>
+                                    <p class="text-xl font-bold text-purple-600" id="monthlyTotalMedia">0</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-600">จำนวนผู้ผลิต:</p>
+                                    <p class="text-xl font-bold text-purple-600" id="monthlyTotalProducers">0</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-600">จำนวนชิ้นงานรวม:</p>
+                                    <p class="text-xl font-bold text-purple-600" id="monthlyTotalItems">0</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead>
+                                    <tr class="table-header">
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ที่</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">วันที่ผลิต</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ชื่อสื่อ/นวัตกรรม</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ชื่อผู้ผลิต</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">จำนวน</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ผู้รับรอง</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="monthlyDataTable" class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="6">กรุณาเลือกเดือนและปีที่ต้องการ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center">
+                        <button id="printMonthlyBtn" class="btn-primary text-white font-medium py-2 px-6 rounded-lg flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                            </svg>
+                            พิมพ์รายงานรายเดือน
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Producer Report -->
+                <div id="producerReport" class="tab-content hidden">
+                    <div class="mb-6">
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
+                            <div class="flex-1">
+                                <label class="form-label block mb-2">เลือกผู้ผลิต</label>
+                                <select id="producerSelect" class="form-input w-full px-4 py-2 rounded-lg">
+                                    <option value="">-- เลือกผู้ผลิต --</option>
+                                </select>
+                            </div>
+                            <div class="flex-1 flex items-end">
+                                <button id="generateProducerBtn" class="btn-primary text-white font-medium py-2 px-4 rounded-lg w-full">
+                                    สร้างรายงาน
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-50 p-4 rounded-lg mb-4">
+                            <h3 class="text-lg font-semibold text-yellow-800 mb-2">สรุปผลงานของ <span id="producerName">-</span></h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-sm text-gray-600">จำนวนสื่อที่ผลิต:</p>
+                                    <p class="text-xl font-bold text-yellow-600" id="producerTotalMedia">0</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-600">จำนวนชิ้นงานรวม:</p>
+                                    <p class="text-xl font-bold text-yellow-600" id="producerTotalItems">0</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead>
+                                    <tr class="table-header">
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ที่</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">วันที่ผลิต</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ชื่อสื่อ/นวัตกรรม</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">จำนวน</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">จุดประสงค์</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ผู้รับรอง</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="producerDataTable" class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="6">กรุณาเลือกผู้ผลิต</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center">
+                        <button id="printProducerBtn" class="btn-primary text-white font-medium py-2 px-6 rounded-lg flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                            </svg>
+                            พิมพ์รายงานตามผู้ผลิต
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer text-white py-8 px-4">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-bold">ทะเบียนผลิตสื่อและนวัตกรรมการสอน</h3>
+                    <p class="mt-2">ระบบบันทึกข้อมูลสื่อและนวัตกรรมการสอน</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p>&copy; 2025 ระบบทะเบียนสื่อและนวัตกรรม</p>
+                    <p class="mt-1">พัฒนาโดย Canva Code</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay fixed inset-0 flex items-center justify-center hidden">
+        <div class="bg-white p-5 rounded-lg shadow-lg flex flex-col items-center">
+            <div class="spinner w-12 h-12 border-4 border-gray-200 rounded-full"></div>
+            <p class="mt-4 text-gray-700 font-medium">กำลังดำเนินการ...</p>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div id="successMessage" class="success-message fixed top-0 left-0 right-0 text-white text-center py-4 px-6 z-50">
+        <p class="font-medium">บันทึกข้อมูลเรียบร้อยแล้ว</p>
+    </div>
+
+    <!-- View Record Modal -->
+    <div id="viewModal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50">
+        <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+        
+        <div class="modal-container bg-white w-11/12 md:max-w-2xl mx-auto rounded shadow-lg z-50 overflow-y-auto">
+            <div class="modal-content py-4 text-left px-6">
+                <!-- Header -->
+                <div class="flex justify-between items-center pb-3">
+                    <p class="text-2xl font-bold">รายละเอียดข้อมูล</p>
+                    <div class="modal-close cursor-pointer z-50">
+                        <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Record Details -->
+                <div id="recordDetails" class="mt-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-sm text-gray-600">ที่:</p>
+                            <p class="text-lg font-medium" id="viewNo">-</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600">วันที่ผลิต:</p>
+                            <p class="text-lg font-medium" id="viewDate">-</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600">ชื่อสื่อ/นวัตกรรม:</p>
+                            <p class="text-lg font-medium" id="viewName">-</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600">ชื่อผู้ผลิต:</p>
+                            <p class="text-lg font-medium" id="viewProduce">-</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600">จำนวน:</p>
+                            <p class="text-lg font-medium" id="viewAmount">-</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600">ผู้รับรอง:</p>
+                            <p class="text-lg font-medium" id="viewName2">-</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <p class="text-sm text-gray-600">จุดประสงค์:</p>
+                            <p class="text-lg font-medium" id="viewObject">-</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 flex justify-center">
+                        <button id="closeViewBtn" class="btn-secondary text-white font-medium py-2 px-6 rounded-lg">
+                            ปิด
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50">
+        <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+        
+        <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+            <div class="modal-content py-4 text-left px-6">
+                <!-- Header -->
+                <div class="flex justify-between items-center pb-3">
+                    <p class="text-2xl font-bold text-red-600">ยืนยันการลบข้อมูล</p>
+                    <div class="modal-close cursor-pointer z-50">
+                        <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Confirmation Message -->
+                <div class="mt-4">
+                    <p class="text-lg">คุณต้องการลบข้อมูลนี้ใช่หรือไม่?</p>
+                    <p class="text-gray-600 mt-2">การลบข้อมูลไม่สามารถเรียกคืนได้</p>
+                    
+                    <div class="mt-6 flex justify-center space-x-4">
+                        <button id="confirmDeleteBtn" class="btn-danger text-white font-medium py-2 px-6 rounded-lg">
+                            ยืนยันการลบ
+                        </button>
+                        <button id="cancelDeleteBtn" class="bg-gray-300 text-gray-800 font-medium py-2 px-6 rounded-lg hover:bg-gray-400">
+                            ยกเลิก
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Print Report Modal -->
+    <div id="printModal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50">
+        <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+        
+        <div class="modal-container bg-white w-11/12 md:max-w-4xl mx-auto rounded shadow-lg z-50 overflow-y-auto">
+            <div class="modal-content py-4 text-left px-6">
+                <!-- Header -->
+                <div class="flex justify-between items-center pb-3 no-print">
+                    <p class="text-2xl font-bold">พิมพ์รายงาน</p>
+                    <div class="modal-close cursor-pointer z-50">
+                        <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Print Options -->
+                <div class="mb-4 no-print">
+                    <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+                        <div class="flex-1">
+                            <label class="form-label block mb-2">ตั้งแต่วันที่</label>
+                            <input type="date" id="startDate" class="form-input w-full px-4 py-2 rounded-lg">
+                        </div>
+                        <div class="flex-1">
+                            <label class="form-label block mb-2">ถึงวันที่</label>
+                            <input type="date" id="endDate" class="form-input w-full px-4 py-2 rounded-lg">
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-center">
+                        <button id="generateReportBtn" class="btn-primary text-white font-medium py-2 px-6 rounded-lg mr-2">
+                            สร้างรายงาน
+                        </button>
+                        <button id="printBtn" class="btn-secondary text-white font-medium py-2 px-6 rounded-lg">
+                            พิมพ์
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Print Area -->
+                <div id="printArea" class="mt-4">
+                    <div class="print-header">
+                        <h2 class="text-2xl font-bold">รายงานทะเบียนผลิตสื่อและนวัตกรรมการสอน</h2>
+                        <p id="reportDateRange" class="mt-2">วันที่ - ถึง วันที่</p>
+                    </div>
+                    
+                    <table class="print-table min-w-full mt-4">
+                        <thead>
+                            <tr>
+                                <th class="text-left">ที่</th>
+                                <th class="text-left">วันที่ผลิต</th>
+                                <th class="text-left">ชื่อสื่อ/นวัตกรรม</th>
+                                <th class="text-left">ชื่อผู้ผลิต</th>
+                                <th class="text-left">จำนวน</th>
+                                <th class="text-left">จุดประสงค์</th>
+                                <th class="text-left">ผู้รับรอง</th>
+                            </tr>
+                        </thead>
+                        <tbody id="printTableBody">
+                            <tr>
+                                <td colspan="7" class="text-center py-4">ไม่พบข้อมูล</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="mt-8 flex justify-between">
+                        <div>
+                            <p>ลงชื่อ ................................................</p>
+                            <p class="mt-2">(.................................................)</p>
+                            <p class="mt-2">ผู้จัดทำรายงาน</p>
+                        </div>
+                        <div>
+                            <p>ลงชื่อ ................................................</p>
+                            <p class="mt-2">(.................................................)</p>
+                            <p class="mt-2">ผู้รับรองรายงาน</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').value = today;
+            
+            // Navigation
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.section-content');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Hide all sections
+                    sections.forEach(section => section.classList.add('hidden'));
+                    
+                    // Show selected section
+                    const sectionId = this.getAttribute('data-section') + 'Section';
+                    document.getElementById(sectionId).classList.remove('hidden');
+                    
+                    // If reports section is shown, load summary data
+                    if (sectionId === 'reportsSection') {
+                        loadSummaryData();
+                    } else if (sectionId === 'manageSection') {
+                        loadCrudData();
+                    }
+                });
+            });
+            
+            // Tab navigation
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all tab contents
+                    tabContents.forEach(content => content.classList.add('hidden'));
+                    
+                    // Show selected tab content
+                    const tabId = this.getAttribute('data-tab') + 'Report';
+                    document.getElementById(tabId).classList.remove('hidden');
+                    
+                    // Load specific tab data if needed
+                    if (tabId === 'summaryReport') {
+                        loadSummaryData();
+                    } else if (tabId === 'producerReport') {
+                        loadProducersList();
+                    }
+                });
+            });
+            
+            // Form submission
+            const form = document.getElementById('mediaForm');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const successMessage = document.getElementById('successMessage');
+            const submitBtn = document.getElementById('submitBtn');
+            const cancelBtn = document.getElementById('cancelBtn');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show loading overlay
+                loadingOverlay.classList.remove('hidden');
+                
+                // Get form data
+                const formData = new FormData(form);
+                const formMode = document.getElementById('formMode').value;
+                
+                // Add action parameter based on form mode
+                if (formMode === 'create') {
+                    formData.append('action', 'create');
+                } else if (formMode === 'update') {
+                    formData.append('action', 'update');
+                }
+                
+                // Convert FormData to URL encoded string
+                const urlEncodedData = new URLSearchParams(formData).toString();
+                
+                // Send data to Google Apps Script
+                fetch('https://script.google.com/macros/s/AKfycbzzxoyTrL4HPITt4V-mjcAex9zKvvPoi4hYVWRQe6oL0IfgQnSGCJ3FoybGpHac4eG8/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: urlEncodedData,
+                    mode: 'no-cors'
+                })
+                .then(response => {
+                    // Hide loading overlay
+                    loadingOverlay.classList.add('hidden');
+                    
+                    // Show success message
+                    successMessage.classList.add('show');
+                    setTimeout(() => {
+                        successMessage.classList.remove('show');
+                    }, 3000);
+                    
+                    // Reset form
+                    resetForm();
+                    
+                    // Refresh data tables
+                    fetchRecentData();
+                    if (document.getElementById('manageSection').classList.contains('hidden') === false) {
+                        loadCrudData();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    loadingOverlay.classList.add('hidden');
+                    alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล กรุณาลองใหม่อีกครั้ง');
+                });
+            });
+            
+            // Cancel button
+            cancelBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                resetForm();
+            });
+            
+            // Reset form function
+            function resetForm() {
+                form.reset();
+                document.getElementById('date').value = today;
+                document.getElementById('formMode').value = 'create';
+                document.getElementById('recordId').value = '';
+                submitBtn.textContent = 'บันทึกข้อมูล';
+                cancelBtn.classList.add('hidden');
+            }
+            
+            // Fetch recent data
+            fetchRecentData();
+            
+            function fetchRecentData() {
+                const dataTable = document.getElementById('dataTable');
+                dataTable.innerHTML = '<tr><td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="6">กำลังโหลดข้อมูล...</td></tr>';
+                
+                // Fetch data from Google Sheet
+                fetch('https://script.google.com/macros/s/AKfycbzzxoyTrL4HPITt4V-mjcAex9zKvvPoi4hYVWRQe6oL0IfgQnSGCJ3FoybGpHac4eG8/exec?action=getRecent')
+                .then(response => response.text())
+                .then(data => {
+                    try {
+                        // Parse the data (assuming it's JSON)
+                        const jsonData = JSON.parse(data);
+                        
+                        if (jsonData.length === 0) {
+                            dataTable.innerHTML = '<tr><td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="6">ไม่พบข้อมูล</td></tr>';
+                            return;
+                        }
+                        
+                        // Clear the table
+                        dataTable.innerHTML = '';
+                        
+                        // Add data to the table
+                        jsonData.forEach((row, index) => {
+                            const tr = document.createElement('tr');
+                            tr.className = 'table-row';
+                            
+                            tr.innerHTML = `
+                                <td class="px-6 py-4 whitespace-nowrap">${row.no || index + 1}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">${formatDate(row.date)}</td>
+                                <td class="px-6 py-4">${row.name}</td>
+                                <td class="px-6 py-4">${row.produce}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">${row.amount}</td>
+                                <td class="px-6 py-4">${row.name2}</td>
+                            `;
+                            
+                            dataTable.appendChild(tr);
+                        });
+                        
+                        // Store data for report generation
+                        window.allData = jsonData;
+                        
+                    } catch (e) {
+                        console.error('Error parsing data:', e);
+                        dataTable.innerHTML = '<tr><td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="6">ไม่สามารถโหลดข้อมูลได้</td></tr>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    dataTable.innerHTML = '<tr><td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="6">ไม่สามารถโหลดข้อมูลได้</td></tr>';
+                });
+            }
+            
+            // CRUD functionality
+            let currentPage = 1;
+            const recordsPerPage = 10;
+            let filteredData = [];
+            
+            // Load CRUD data
+            function loadCrudData() {
+                if (!window.allData) {
+                    fetchRecentData().then(() => {
+                        if (window.allData) {
+                            setupCrudTable();
+                        }
+                    });
+                } else {
+                    setupCrudTable();
+                }
+            }
+            
+            // Setup CRUD table with pagination
+            function setupCrudTable() {
+                const searchInput = document.getElementById('searchInput');
+                const searchTerm = searchInput.value.toLowerCase();
+                
+                // Filter data based on search term
+                filteredData = window.allData.filter(item => {
+                    return (
+                        (item.name && item.name.toLowerCase().includes(searchTerm)) ||
+                        (item.produce && item.produce.toLowerCase().includes(searchTerm)) ||
+                        (item.object && item.object.toLowerCase().includes(searchTerm)) ||
+                        (item.name2 && item.name2.toLowerCase().includes(searchTerm))
+                    );
+                });
+                
+                // Calculate pagination
+                const totalPages = Math.ceil(filteredData.length / recordsPerPage);
+                const startIndex = (currentPage - 1) * recordsPerPage;
+                const endIndex = Math.min(startIndex + recordsPerPage, filteredData.length);
+                const currentPageData = filteredData.slice(startIndex, endIndex);
+                
+                // Update pagination info
+                document.getElementById('startRecord').textContent = filteredData.length > 0 ? startIndex + 1 : 0;
+                document.getElementById('endRecord').textContent = endIndex;
+                document.getElementById('totalRecords').textContent = filteredData.length;
+                
+                // Enable/disable pagination buttons
+                document.getElementById('prevPageBtn').disabled = currentPage === 1;
+                document.getElementById('nextPageBtn').disabled = currentPage === totalPages || totalPages === 0;
+                
+                // Generate page numbers
+                const pageNumbers = document.getElementById('pageNumbers');
+                pageNumbers.innerHTML = '';
+                
+                for (let i = 1; i <= totalPages; i++) {
+                    const pageBtn = document.createElement('button');
+                    pageBtn.className = `px-3 py-1 border border-gray-300 rounded-md ${i === currentPage ? 'bg-purple-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'}`;
+                    pageBtn.textContent = i;
+                    pageBtn.addEventListener('click', () => {
+                        currentPage = i;
+                        setupCrudTable();
+                    });
+                    pageNumbers.appendChild(pageBtn);
+                }
+                
+                // Update table
+                const crudTable = document.getElementById('crudTable');
+                
+                if (currentPageData.length === 0) {
+                    crudTable.innerHTML = '<tr><td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="7">ไม่พบข้อมูล</td></tr>';
+                    return;
+                }
+                
+                crudTable.innerHTML = '';
+                
+                currentPageData.forEach((row, index) => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'table-row';
+                    
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap">${row.no || (startIndex + index + 1)}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${formatDate(row.date)}</td>
+                        <td class="px-6 py-4">${row.name}</td>
+                        <td class="px-6 py-4">${row.produce}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${row.amount}</td>
+                        <td class="px-6 py-4">${row.name2}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-center">
+                            <div class="flex justify-center space-x-2">
+                                <button class="view-btn action-btn" data-index="${startIndex + index}">ดู</button>
+                                <button class="edit-btn action-btn" data-index="${startIndex + index}">แก้ไข</button>
+                                <button class="delete-btn action-btn" data-index="${startIndex + index}">ลบ</button>
+                            </div>
+                        </td>
+                    `;
+                    
+                    crudTable.appendChild(tr);
+                });
+                
+                // Add event listeners to action buttons
+                document.querySelectorAll('.view-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        viewRecord(filteredData[index]);
+                    });
+                });
+                
+                document.querySelectorAll('.edit-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        editRecord(filteredData[index]);
+                    });
+                });
+                
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        showDeleteConfirmation(filteredData[index]);
+                    });
+                });
+            }
+            
+            // Search functionality
+            document.getElementById('searchInput').addEventListener('input', function() {
+                currentPage = 1;
+                setupCrudTable();
+            });
+            
+            // Refresh data button
+            document.getElementById('refreshDataBtn').addEventListener('click', function() {
+                document.getElementById('searchInput').value = '';
+                fetchRecentData().then(() => {
+                    if (window.allData) {
+                        currentPage = 1;
+                        setupCrudTable();
+                    }
+                });
+            });
+            
+            // Pagination buttons
+            document.getElementById('prevPageBtn').addEventListener('click', function() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    setupCrudTable();
+                }
+            });
+            
+            document.getElementById('nextPageBtn').addEventListener('click', function() {
+                const totalPages = Math.ceil(filteredData.length / recordsPerPage);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    setupCrudTable();
+                }
+            });
+            
+            // View record
+            function viewRecord(record) {
+                document.getElementById('viewNo').textContent = record.no || '-';
+                document.getElementById('viewDate').textContent = formatDate(record.date);
+                document.getElementById('viewName').textContent = record.name;
+                document.getElementById('viewProduce').textContent = record.produce;
+                document.getElementById('viewAmount').textContent = record.amount;
+                document.getElementById('viewName2').textContent = record.name2;
+                document.getElementById('viewObject').textContent = record.object || '-';
+                
+                // Show modal
+                document.getElementById('viewModal').classList.remove('opacity-0', 'pointer-events-none');
+            }
+            
+            // Close view modal
+            document.querySelector('#viewModal .modal-close').addEventListener('click', function() {
+                document.getElementById('viewModal').classList.add('opacity-0', 'pointer-events-none');
+            });
+            
+            document.getElementById('closeViewBtn').addEventListener('click', function() {
+                document.getElementById('viewModal').classList.add('opacity-0', 'pointer-events-none');
+            });
+            
+            // Edit record
+            function editRecord(record) {
+                // Switch to form section
+                document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+                document.querySelector('[data-section="form"]').classList.add('active');
+                
+                document.querySelectorAll('.section-content').forEach(section => section.classList.add('hidden'));
+                document.getElementById('formSection').classList.remove('hidden');
+                
+                // Set form mode to update
+                document.getElementById('formMode').value = 'update';
+                document.getElementById('recordId').value = record.no;
+                
+                // Fill form with record data
+                document.getElementById('date').value = record.date;
+                document.getElementById('name').value = record.name;
+                document.getElementById('produce').value = record.produce;
+                document.getElementById('amount').value = record.amount;
+                document.getElementById('object').value = record.object || '';
+                document.getElementById('name2').value = record.name2;
+                
+                // Update button text and show cancel button
+                document.getElementById('submitBtn').textContent = 'อัพเดทข้อมูล';
+                document.getElementById('cancelBtn').classList.remove('hidden');
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            
+            // Delete record
+            function showDeleteConfirmation(record) {
+                // Store record ID for deletion
+                window.recordToDelete = record.no;
+                
+                // Show delete confirmation modal
+                document.getElementById('deleteModal').classList.remove('opacity-0', 'pointer-events-none');
+            }
+            
+            // Close delete modal
+            document.querySelector('#deleteModal .modal-close').addEventListener('click', function() {
+                document.getElementById('deleteModal').classList.add('opacity-0', 'pointer-events-none');
+            });
+            
+            document.getElementById('cancelDeleteBtn').addEventListener('click', function() {
+                document.getElementById('deleteModal').classList.add('opacity-0', 'pointer-events-none');
+            });
+            
+            // Confirm delete
+            document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+                if (!window.recordToDelete) return;
+                
+                // Show loading overlay
+                loadingOverlay.classList.remove('hidden');
+                
+                // Send delete request
+                const formData = new FormData();
+                formData.append('action', 'delete');
+                formData.append('recordId', window.recordToDelete);
+                
+                const urlEncodedData = new URLSearchParams(formData).toString();
+                
+                fetch('https://script.google.com/macros/s/AKfycbzzxoyTrL4HPITt4V-mjcAex9zKvvPoi4hYVWRQe6oL0IfgQnSGCJ3FoybGpHac4eG8/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: urlEncodedData,
+                    mode: 'no-cors'
+                })
+                .then(response => {
+                    // Hide loading overlay
+                    loadingOverlay.classList.add('hidden');
+                    
+                    // Close delete modal
+                    document.getElementById('deleteModal').classList.add('opacity-0', 'pointer-events-none');
+                    
+                    // Show success message
+                    successMessage.textContent = 'ลบข้อมูลเรียบร้อยแล้ว';
+                    successMessage.classList.add('show');
+                    setTimeout(() => {
+                        successMessage.classList.remove('show');
+                        successMessage.textContent = 'บันทึกข้อมูลเรียบร้อยแล้ว';
+                    }, 3000);
+                    
+                    // Refresh data
+                    fetchRecentData().then(() => {
+                        if (window.allData) {
+                            setupCrudTable();
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    loadingOverlay.classList.add('hidden');
+                    alert('เกิดข้อผิดพลาดในการลบข้อมูล กรุณาลองใหม่อีกครั้ง');
+                });
+            });
+            
+            // Load summary data for reports
+            function loadSummaryData() {
+                if (!window.allData) {
+                    return;
+                }
+                
+                const data = window.allData;
+                
+                // Calculate summary statistics
+                const totalMedia = data.length;
+                
+                // Get unique producers
+                const producers = [...new Set(data.map(item => item.produce))];
+                const totalProducers = producers.length;
+                
+                // Calculate total items
+                const totalItems = data.reduce((sum, item) => sum + (parseInt(item.amount) || 0), 0);
+                
+                // Update summary cards
+                document.getElementById('totalMedia').textContent = totalMedia;
+                document.getElementById('totalProducers').textContent = totalProducers;
+                document.getElementById('totalItems').textContent = totalItems;
+                
+                // Update latest media table (show top 5)
+                const latestMediaTable = document.getElementById('latestMediaTable');
+                latestMediaTable.innerHTML = '';
+                
+                // Sort by date (newest first) and take top 5
+                const latestMedia = [...data]
+                    .sort((a, b) => new Date(b.date) - new Date(a.date))
+                    .slice(0, 5);
+                
+                if (latestMedia.length === 0) {
+                    latestMediaTable.innerHTML = '<tr><td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="4">ไม่พบข้อมูล</td></tr>';
+                    return;
+                }
+                
+                latestMedia.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'table-row';
+                    
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap">${formatDate(row.date)}</td>
+                        <td class="px-6 py-4">${row.name}</td>
+                        <td class="px-6 py-4">${row.produce}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${row.amount}</td>
+                    `;
+                    
+                    latestMediaTable.appendChild(tr);
+                });
+            }
+            
+            // Load producers list for producer report
+            function loadProducersList() {
+                if (!window.allData) {
+                    return;
+                }
+                
+                const data = window.allData;
+                
+                // Get unique producers
+                const producers = [...new Set(data.map(item => item.produce))];
+                
+                // Update producer select
+                const producerSelect = document.getElementById('producerSelect');
+                
+                // Clear existing options except the first one
+                while (producerSelect.options.length > 1) {
+                    producerSelect.remove(1);
+                }
+                
+                // Add producer options
+                producers.forEach(producer => {
+                    const option = document.createElement('option');
+                    option.value = producer;
+                    option.textContent = producer;
+                    producerSelect.appendChild(option);
+                });
+            }
+            
+            // Generate monthly report
+            document.getElementById('generateMonthlyBtn').addEventListener('click', function() {
+                if (!window.allData) {
+                    return;
+                }
+                
+                const month = parseInt(document.getElementById('monthSelect').value);
+                const year = parseInt(document.getElementById('yearSelect').value);
+                
+                // Filter data by month and year
+                const filteredData = window.allData.filter(item => {
+                    const date = new Date(item.date);
+                    return date.<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94c82910d1e72603',t:'MTc0OTM4MzMwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>
