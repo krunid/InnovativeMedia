@@ -1,922 +1,1114 @@
+
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ทะเบียนผลิตสื่อและนวัตกรรมการสอน</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Sarabun', sans-serif;
-      background-color: #f5f5f5;
-    }
-    .app-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    .app-header {
-      background-color: #0d6efd;
-      color: white;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    .app-title {
-      margin: 0;
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .card {
-      border: none;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
-    }
-    .card-header {
-      background-color: #f8f9fa;
-      border-bottom: 1px solid #dee2e6;
-      font-weight: bold;
-    }
-    .btn-primary {
-      background-color: #0d6efd;
-      border-color: #0d6efd;
-    }
-    .btn-success {
-      background-color: #198754;
-      border-color: #198754;
-    }
-    .btn-danger {
-      background-color: #dc3545;
-      border-color: #dc3545;
-    }
-    .btn-warning {
-      background-color: #ffc107;
-      border-color: #ffc107;
-      color: #000;
-    }
-    .table {
-      background-color: white;
-    }
-    .modal-header {
-      background-color: #f8f9fa;
-      border-bottom: 1px solid #dee2e6;
-    }
-    .modal-footer {
-      background-color: #f8f9fa;
-      border-top: 1px solid #dee2e6;
-    }
-    .tab-content {
-      padding: 20px;
-      background-color: white;
-      border: 1px solid #dee2e6;
-      border-top: none;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-    }
-    
-    /* สไตล์สำหรับหน้ารายงาน */
-    @media print {
-      .no-print {
-        display: none !important;
-      }
-      body {
-        padding: 0;
-        margin: 0;
-      }
-      .container {
-        width: 100%;
-        max-width: 100%;
-        padding: 0;
-        margin: 0;
-      }
-      .table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-      .table th, .table td {
-        border: 1px solid #000;
-      }
-      .page-header {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-    }
-    
-    .report-header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .report-title {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    .report-subtitle {
-      font-size: 18px;
-      margin-bottom: 5px;
-    }
-    .report-date {
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-    .table-container {
-      margin-bottom: 30px;
-    }
-    .summary-container {
-      margin-top: 30px;
-      margin-bottom: 30px;
-    }
-    .filter-container {
-      margin-bottom: 20px;
-      padding: 15px;
-      background-color: #f8f9fa;
-      border-radius: 5px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ทะเบียนผลิตสื่อและนวัตกรรมการสอน</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --secondary: #fbbf24;
+            --primary-light: #c4b5fd;
+            --secondary-light: #fde68a;
+        }
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f9fafb;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        .btn-primary {
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #7c3aed;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(139, 92, 246, 0.25);
+        }
+        .btn-secondary {
+            background-color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #f59e0b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(251, 191, 36, 0.25);
+        }
+        .form-container {
+            background-color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 1rem;
+            border-top: 4px solid var(--primary);
+        }
+        .form-input {
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+        }
+        .form-label {
+            color: #4b5563;
+            font-weight: 500;
+        }
+        .table-header {
+            background-color: var(--primary);
+            color: white;
+        }
+        .table-row:nth-child(even) {
+            background-color: var(--primary-light);
+            background-opacity: 0.1;
+        }
+        .table-row:hover {
+            background-color: var(--secondary-light);
+        }
+        .footer {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+        }
+        .loading-overlay {
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 50;
+        }
+        .spinner {
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .success-message {
+            background-color: #10b981;
+            transform: translateY(-100%);
+            transition: transform 0.5s ease;
+        }
+        .success-message.show {
+            transform: translateY(0);
+        }
+        @media (max-width: 640px) {
+            .form-container {
+                padding: 1rem;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printArea, #printArea * {
+                visibility: visible;
+            }
+            #printArea {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-header {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .print-table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            .print-table th, .print-table td {
+                border: 1px solid #000;
+                padding: 8px;
+            }
+            .print-table th {
+                background-color: #f0f0f0;
+            }
+        }
+        
+        /* Modal styles */
+        .modal {
+            transition: opacity 0.25s ease;
+        }
+        .modal-container {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s ease;
+        }
+        
+        /* Navigation menu */
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+        }
+        
+        /* Tab styles */
+        .tab {
+            transition: all 0.3s ease;
+        }
+        .tab:hover {
+            background-color: var(--primary-light);
+        }
+        .tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="app-container">
-    <div class="app-header">
-      <h1 class="app-title">ทะเบียนผลิตสื่อและนวัตกรรมการสอน</h1>
-    </div>
-    
-    <!-- แท็บเมนู -->
-    <ul class="nav nav-tabs" id="appTabs" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
-          <i class="bi bi-house-door"></i> หน้าหลัก
-        </button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="report-tab" data-bs-toggle="tab" data-bs-target="#report" type="button" role="tab" aria-controls="report" aria-selected="false">
-          <i class="bi bi-file-earmark-text"></i> รายงาน
-        </button>
-      </li>
-    </ul>
-    
-    <!-- เนื้อหาแท็บ -->
-    <div class="tab-content" id="appTabsContent">
-      <!-- แท็บหน้าหลัก -->
-      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-        <!-- ส่วนเพิ่มข้อมูล -->
-        <div class="card mb-4">
-          <div class="card-header">
-            <i class="bi bi-plus-circle"></i> เพิ่มข้อมูล
-          </div>
-          <div class="card-body">
-            <form id="addForm">
-              <div class="row mb-3">
-                <div class="col-md-6">
-                  <label for="name" class="form-label">ชื่อสื่อ/นวัตกรรม</label>
-                  <input type="text" class="form-control" id="name" name="name" required>
-                </div>
-                <div class="col-md-6">
-                  <label for="producer" class="form-label">ชื่อผู้ผลิตสื่อ/นวัตกรรม</label>
-                  <input type="text" class="form-control" id="producer" name="producer" required>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-4">
-                  <label for="amount" class="form-label">จำนวน</label>
-                  <input type="number" class="form-control" id="amount" name="amount" min="1" required>
-                </div>
-                <div class="col-md-4">
-                  <label for="object" class="form-label">จุดประสงค์</label>
-                  <input type="text" class="form-control" id="object" name="object" required>
-                </div>
-                <div class="col-md-4">
-                  <label for="name2" class="form-label">ผู้รับรอง</label>
-                  <input type="text" class="form-control" id="name2" name="name2" required>
-                </div>
-              </div>
-              <div class="d-grid">
-                <button type="submit" class="btn btn-primary">
-                  <i class="bi bi-save"></i> บันทึกข้อมูล
-                </button>
-              </div>
-            </form>
-          </div>
+    <!-- Header -->
+    <header class="header text-white py-6 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto">
+            <h1 class="text-3xl font-bold text-center">ทะเบียนผลิตสื่อและนวัตกรรมการสอน</h1>
+            <p class="text-center mt-2 text-white text-opacity-90">ระบบบันทึกข้อมูลสื่อและนวัตกรรมการสอน</p>
+            
+            <!-- Navigation Menu -->
+            <nav class="mt-6">
+                <ul class="flex flex-wrap justify-center space-x-1 md:space-x-4">
+                    <li>
+                        <a href="#" class="nav-link active px-4 py-2 rounded-lg inline-block" data-section="form">
+                            บันทึกข้อมูล
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-4 py-2 rounded-lg inline-block" data-section="recent">
+                            ข้อมูลล่าสุด
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-4 py-2 rounded-lg inline-block" data-section="reports">
+                            รายงานต่างๆ
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        
-        <!-- ส่วนแสดงข้อมูล -->
-        <div class="card">
-          <div class="card-header">
-            <div class="d-flex justify-content-between align-items-center">
-              <div>
-                <i class="bi bi-table"></i> ข้อมูลทั้งหมด
-              </div>
-              <button class="btn btn-sm btn-primary" id="refreshBtn">
-                <i class="bi bi-arrow-clockwise"></i> รีเฟรช
-              </button>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-striped table-hover">
-                <thead>
-                  <tr>
-                    <th>ลำดับ</th>
-                    <th>วันที่</th>
-                    <th>ชื่อสื่อ/นวัตกรรม</th>
-                    <th>ชื่อผู้ผลิตสื่อ</th>
-                    <th>จำนวน</th>
-                    <th>จุดประสงค์</th>
-                    <th>ผู้รับรอง</th>
-                    <th>จัดการ</th>
-                  </tr>
-                </thead>
-                <tbody id="dataTableBody">
-                  <!-- ข้อมูลจะถูกเพิ่มด้วย JavaScript -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- แท็บรายงาน -->
-      <div class="tab-pane fade" id="report" role="tabpanel" aria-labelledby="report-tab">
-        <!-- ส่วนตัวกรองรายงาน (ไม่แสดงในการพิมพ์) -->
-        <div class="filter-container no-print">
-          <h4>ตัวเลือกรายงาน</h4>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="reportType" class="form-label">ประเภทรายงาน</label>
-                <select class="form-select" id="reportType">
-                  <option value="all">รายงานทั้งหมด</option>
-                  <option value="byProducer">รายงานแยกตามผู้ผลิตสื่อ</option>
-                  <option value="summary">รายงานสรุปตามผู้ผลิตสื่อ</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-6" id="producerFilterContainer" style="display: none;">
-              <div class="mb-3">
-                <label for="producerFilter" class="form-label">เลือกผู้ผลิตสื่อ</label>
-                <select class="form-select" id="producerFilter">
-                  <option value="">-- เลือกผู้ผลิตสื่อ --</option>
-                  <!-- จะเติมข้อมูลด้วย JavaScript -->
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="d-flex justify-content-between">
-            <button class="btn btn-primary" id="generateReportBtn">สร้างรายงาน</button>
-            <button class="btn btn-success" id="printReportBtn">พิมพ์รายงาน</button>
-          </div>
-        </div>
+    </header>
 
-        <!-- ส่วนหัวรายงาน -->
-        <div class="report-header">
-          <div class="report-title">รายงานทะเบียนผลิตสื่อและนวัตกรรมการสอน</div>
-          <div class="report-subtitle" id="reportSubtitle"></div>
-          <div class="report-date" id="reportDate"></div>
-        </div>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Form Section -->
+        <section id="formSection" class="section-content">
+            <div class="form-container p-6 mb-8">
+                <h2 class="text-2xl font-semibold mb-6 text-gray-800">บันทึกข้อมูลสื่อและนวัตกรรม</h2>
+                
+                <form id="mediaForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="date" class="form-label block mb-2">วันที่ผลิต</label>
+                            <input type="date" id="date" name="date" required class="form-input w-full px-4 py-2 rounded-lg" value="">
+                        </div>
+                        
+                        <div>
+                            <label for="name" class="form-label block mb-2">ชื่อสื่อ/นวัตกรรม</label>
+                            <input type="text" id="name" name="name" required class="form-input w-full px-4 py-2 rounded-lg" placeholder="กรุณาระบุชื่อสื่อหรือนวัตกรรม">
+                        </div>
+                        
+                        <div>
+                            <label for="produce" class="form-label block mb-2">ชื่อผู้ผลิต</label>
+                            <input type="text" id="produce" name="produce" required class="form-input w-full px-4 py-2 rounded-lg" placeholder="กรุณาระบุชื่อผู้ผลิต">
+                        </div>
+                        
+                        <div>
+                            <label for="amount" class="form-label block mb-2">จำนวน</label>
+                            <input type="number" id="amount" name="amount" required class="form-input w-full px-4 py-2 rounded-lg" placeholder="กรุณาระบุจำนวน" min="1">
+                        </div>
+                        
+                        <div class="md:col-span-2">
+                            <label for="object" class="form-label block mb-2">จุดประสงค์</label>
+                            <textarea id="object" name="object" required class="form-input w-full px-4 py-2 rounded-lg" rows="3" placeholder="กรุณาระบุจุดประสงค์ของสื่อหรือนวัตกรรม"></textarea>
+                        </div>
+                        
+                        <div>
+                            <label for="name2" class="form-label block mb-2">ผู้รับรอง</label>
+                            <input type="text" id="name2" name="name2" required class="form-input w-full px-4 py-2 rounded-lg" placeholder="กรุณาระบุชื่อผู้รับรอง">
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center pt-4">
+                        <button type="submit" class="btn-primary text-white font-medium py-3 px-8 rounded-lg text-lg">
+                            บันทึกข้อมูล
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        
+        <!-- Recent Data Section -->
+        <section id="recentSection" class="section-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800">ข้อมูลล่าสุด</h2>
+                    <button id="printReportBtn" class="btn-secondary text-white font-medium py-2 px-4 rounded-lg flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                        </svg>
+                        พิมพ์รายงาน
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead>
+                            <tr class="table-header">
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ที่</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">วันที่ผลิต</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ชื่อสื่อ/นวัตกรรม</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ชื่อผู้ผลิต</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">จำนวน</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ผู้รับรอง</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTable" class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="6">กำลังโหลดข้อมูล...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Reports Section -->
+        <section id="reportsSection" class="section-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h2 class="text-2xl font-semibold mb-6 text-gray-800">รายงานต่างๆ</h2>
+                
+                <!-- Report Tabs -->
+                <div class="border-b border-gray-200 mb-6">
+                    <ul class="flex flex-wrap -mb-px">
+                        <li class="mr-2">
+                            <a href="#" class="tab active inline-block py-2 px-4 rounded-t-lg" data-tab="summary">
+                                สรุปภาพรวม
+                            </a>
+                        </li>
+                        <li class="mr-2">
+                            <a href="#" class="tab inline-block py-2 px-4 rounded-t-lg" data-tab="monthly">
+                                รายงานรายเดือน
+                            </a>
+                        </li>
+                        <li class="mr-2">
+                            <a href="#" class="tab inline-block py-2 px-4 rounded-t-lg" data-tab="producer">
+                                รายงานตามผู้ผลิต
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Summary Report -->
+                <div id="summaryReport" class="tab-content">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <div class="bg-purple-100 p-4 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold text-purple-800 mb-2">จำนวนสื่อทั้งหมด</h3>
+                            <p class="text-3xl font-bold text-purple-600" id="totalMedia">0</p>
+                        </div>
+                        <div class="bg-yellow-100 p-4 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold text-yellow-800 mb-2">จำนวนผู้ผลิต</h3>
+                            <p class="text-3xl font-bold text-yellow-600" id="totalProducers">0</p>
+                        </div>
+                        <div class="bg-green-100 p-4 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold text-green-800 mb-2">จำนวนชิ้นงานรวม</h3>
+                            <p class="text-3xl font-bold text-green-600" id="totalItems">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold mb-4">สื่อที่ผลิตล่าสุด</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead>
+                                    <tr class="table-header">
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">วันที่ผลิต</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ชื่อสื่อ/นวัตกรรม</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ชื่อผู้ผลิต</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">จำนวน</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="latestMediaTable" class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="4">กำลังโหลดข้อมูล...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center">
+                        <button id="printSummaryBtn" class="btn-primary text-white font-medium py-2 px-6 rounded-lg flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                            </svg>
+                            พิมพ์รายงานสรุป
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Monthly Report -->
+                <div id="monthlyReport" class="tab-content hidden">
+                    <div class="mb-6">
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
+                            <div class="flex-1">
+                                <label class="form-label block mb-2">เลือกเดือน</label>
+                                <select id="monthSelect" class="form-input w-full px-4 py-2 rounded-lg">
+                                    <option value="1">มกราคม</option>
+                                    <option value="2">กุมภาพันธ์</option>
+                                    <option value="3">มีนาคม</option>
+                                    <option value="4">เมษายน</option>
+                                    <option value="5">พฤษภาคม</option>
+                                    <option value="6">มิถุนายน</option>
+                                    <option value="7">กรกฎาคม</option>
+                                    <option value="8">สิงหาคม</option>
+                                    <option value="9">กันยายน</option>
+                                    <option value="10">ตุลาคม</option>
+                                    <option value="11">พฤศจิกายน</option>
+                                    <option value="12">ธันวาคม</option>
+                                </select>
+                            </div>
+                            <div class="flex-1">
+                                <label class="form-label block mb-2">เลือกปี</label>
+                                <select id="yearSelect" class="form-input w-full px-4 py-2 rounded-lg">
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                </select>
+                            </div>
+                            <div class="flex-1 flex items-end">
+                                <button id="generateMonthlyBtn" class="btn-primary text-white font-medium py-2 px-4 rounded-lg w-full">
+                                    สร้างรายงาน
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                            <h3 class="text-lg font-semibold text-purple-800 mb-2">สรุปประจำเดือน <span id="monthYearTitle">-</span></h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <p class="text-sm text-gray-600">จำนวนสื่อที่ผลิต:</p>
+                                    <p class="text-xl font-bold text-purple-600" id="monthlyTotalMedia">0</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-600">จำนวนผู้ผลิต:</p>
+                                    <p class="text-xl font-bold text-purple-600" id="monthlyTotalProducers">0</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-600">จำนวนชิ้นงานรวม:</p>
+                                    <p class="text-xl font-bold text-purple-600" id="monthlyTotalItems">0</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead>
+                                    <tr class="table-header">
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ที่</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">วันที่ผลิต</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ชื่อสื่อ/นวัตกรรม</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ชื่อผู้ผลิต</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">จำนวน</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ผู้รับรอง</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="monthlyDataTable" class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="6">กรุณาเลือกเดือนและปีที่ต้องการ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center">
+                        <button id="printMonthlyBtn" class="btn-primary text-white font-medium py-2 px-6 rounded-lg flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                            </svg>
+                            พิมพ์รายงานรายเดือน
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Producer Report -->
+                <div id="producerReport" class="tab-content hidden">
+                    <div class="mb-6">
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
+                            <div class="flex-1">
+                                <label class="form-label block mb-2">เลือกผู้ผลิต</label>
+                                <select id="producerSelect" class="form-input w-full px-4 py-2 rounded-lg">
+                                    <option value="">-- เลือกผู้ผลิต --</option>
+                                </select>
+                            </div>
+                            <div class="flex-1 flex items-end">
+                                <button id="generateProducerBtn" class="btn-primary text-white font-medium py-2 px-4 rounded-lg w-full">
+                                    สร้างรายงาน
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-50 p-4 rounded-lg mb-4">
+                            <h3 class="text-lg font-semibold text-yellow-800 mb-2">สรุปผลงานของ <span id="producerName">-</span></h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-sm text-gray-600">จำนวนสื่อที่ผลิต:</p>
+                                    <p class="text-xl font-bold text-yellow-600" id="producerTotalMedia">0</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-600">จำนวนชิ้นงานรวม:</p>
+                                    <p class="text-xl font-bold text-yellow-600" id="producerTotalItems">0</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead>
+                                    <tr class="table-header">
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ที่</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">วันที่ผลิต</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ชื่อสื่อ/นวัตกรรม</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">จำนวน</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">จุดประสงค์</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ผู้รับรอง</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="producerDataTable" class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="6">กรุณาเลือกผู้ผลิต</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center">
+                        <button id="printProducerBtn" class="btn-primary text-white font-medium py-2 px-6 rounded-lg flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                            </svg>
+                            พิมพ์รายงานตามผู้ผลิต
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-        <!-- ส่วนเนื้อหารายงาน -->
-        <div class="table-container">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th width="5%">ลำดับ</th>
-                <th width="15%">วันที่</th>
-                <th width="25%">ชื่อสื่อ/นวัตกรรม</th>
-                <th width="20%">ชื่อผู้ผลิตสื่อ</th>
-                <th width="10%">จำนวน</th>
-                <th width="15%">จุดประสงค์</th>
-                <th width="10%">ผู้รับรอง</th>
-              </tr>
-            </thead>
-            <tbody id="reportTableBody">
-              <!-- จะเติมข้อมูลด้วย JavaScript -->
-            </tbody>
-          </table>
+    <!-- Footer -->
+    <footer class="footer text-white py-8 px-4">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-bold">ทะเบียนผลิตสื่อและนวัตกรรมการสอน</h3>
+                    <p class="mt-2">ระบบบันทึกข้อมูลสื่อและนวัตกรรมการสอน</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p>&copy; 2025 ระบบทะเบียนสื่อและนวัตกรรม</p>
+                    <p class="mt-1">พัฒนาโดย Canva Code</p>
+                </div>
+            </div>
         </div>
+    </footer>
 
-        <!-- ส่วนสรุปรายงาน -->
-        <div class="summary-container" id="reportSummary">
-          <!-- จะเติมข้อมูลด้วย JavaScript -->
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay fixed inset-0 flex items-center justify-center hidden">
+        <div class="bg-white p-5 rounded-lg shadow-lg flex flex-col items-center">
+            <div class="spinner w-12 h-12 border-4 border-gray-200 rounded-full"></div>
+            <p class="mt-4 text-gray-700 font-medium">กำลังบันทึกข้อมูล...</p>
         </div>
-        
-        <!-- สำหรับรายงานสรุปตามผู้ผลิตสื่อ -->
-        <div class="container mt-4" id="summaryReportContainer" style="display: none;">
-          <div class="table-container">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th width="10%">ลำดับ</th>
-                  <th width="50%">ชื่อผู้ผลิตสื่อ</th>
-                  <th width="20%">จำนวนรายการ</th>
-                  <th width="20%">จำนวนรวม</th>
-                </tr>
-              </thead>
-              <tbody id="summaryTableBody">
-                <!-- จะเติมข้อมูลด้วย JavaScript -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  
-  <!-- Modal แก้ไขข้อมูล -->
-  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editModalLabel">แก้ไขข้อมูล</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="editForm">
-            <input type="hidden" id="editRecordId" name="recordId">
-            <div class="mb-3">
-              <label for="editName" class="form-label">ชื่อสื่อ/นวัตกรรม</label>
-              <input type="text" class="form-control" id="editName" name="name" required>
-            </div>
-            <div class="mb-3">
-              <label for="editProducer" class="form-label">ชื่อผู้ผลิตสื่อ/นวัตกรรม</label>
-              <input type="text" class="form-control" id="editProducer" name="producer" required>
-            </div>
-            <div class="mb-3">
-              <label for="editAmount" class="form-label">จำนวน</label>
-              <input type="number" class="form-control" id="editAmount" name="amount" min="1" required>
-            </div>
-            <div class="mb-3">
-              <label for="editObject" class="form-label">จุดประสงค์</label>
-              <input type="text" class="form-control" id="editObject" name="object" required>
-            </div>
-            <div class="mb-3">
-              <label for="editName2" class="form-label">ผู้รับรอง</label>
-              <input type="text" class="form-control" id="editName2" name="name2" required>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-          <button type="button" class="btn btn-primary" id="saveEditBtn">บันทึกการแก้ไข</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Modal ยืนยันการลบ -->
-  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">ยืนยันการลบ</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>คุณต้องการลบข้อมูลนี้ใช่หรือไม่?</p>
-          <p id="deleteRecordInfo"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-          <button type="button" class="btn btn-danger" id="confirmDeleteBtn">ยืนยันการลบ</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- เพิ่ม Bootstrap และ JavaScript -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // ตัวแปรสำหรับเก็บข้อมูล
-    let allRecords = [];
-    let producers = [];
-    let currentReportType = 'all';
-    let selectedProducer = '';
-    let deleteRecordId = null;
-    
-    // เมื่อโหลดหน้าเสร็จ
-    document.addEventListener('DOMContentLoaded', function() {
-      // โหลดข้อมูลเริ่มต้น
-      loadAllData();
-      
-      // เพิ่ม event listener สำหรับฟอร์มเพิ่มข้อมูล
-      document.getElementById('addForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        addRecord();
-      });
-      
-      // เพิ่ม event listener สำหรับปุ่มรีเฟรช
-      document.getElementById('refreshBtn').addEventListener('click', function() {
-        loadAllData();
-      });
-      
-      // เพิ่ม event listener สำหรับปุ่มบันทึกการแก้ไข
-      document.getElementById('saveEditBtn').addEventListener('click', function() {
-        updateRecord();
-      });
-      
-      // เพิ่ม event listener สำหรับปุ่มยืนยันการลบ
-      document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
-        deleteRecord();
-      });
-      
-      // ตั้งค่าวันที่รายงาน
-      setReportDate();
-      
-      // เพิ่ม event listener สำหรับตัวเลือกประเภทรายงาน
-      document.getElementById('reportType').addEventListener('change', function() {
-        currentReportType = this.value;
-        toggleProducerFilter();
-      });
-      
-      // เพิ่ม event listener สำหรับปุ่มสร้างรายงาน
-      document.getElementById('generateReportBtn').addEventListener('click', generateReport);
-      
-      // เพิ่ม event listener สำหรับปุ่มพิมพ์รายงาน
-      document.getElementById('printReportBtn').addEventListener('click', function() {
-        window.print();
-      });
-      
-      // เพิ่ม event listener สำหรับแท็บรายงาน
-      document.getElementById('report-tab').addEventListener('click', function() {
-        loadProducers();
-      });
-    });
-    
-    // โหลดข้อมูลทั้งหมด
-    function loadAllData() {
-      google.script.run
-        .withSuccessHandler(function(response) {
-          if (response.success) {
-            allRecords = response.records;
-            displayRecordsInTable(allRecords);
-          } else {
-            alert('เกิดข้อผิดพลาด: ' + response.message);
-          }
-        })
-        .getAllRecords();
-    }
-    
-    // แสดงข้อมูลในตาราง
-    function displayRecordsInTable(records) {
-      const tableBody = document.getElementById('dataTableBody');
-      tableBody.innerHTML = '';
-      
-      if (records.length === 0) {
-        const row = document.createElement('tr');
-        const cell = document.createElement('td');
-        cell.colSpan = 8;
-        cell.textContent = 'ไม่พบข้อมูล';
-        cell.style.textAlign = 'center';
-        row.appendChild(cell);
-        tableBody.appendChild(row);
-        return;
-      }
-      
-      records.forEach(function(record) {
-        const row = document.createElement('tr');
+    <!-- Success Message -->
+    <div id="successMessage" class="success-message fixed top-0 left-0 right-0 text-white text-center py-4 px-6 z-50">
+        <p class="font-medium">บันทึกข้อมูลเรียบร้อยแล้ว</p>
+    </div>
+
+    <!-- Print Report Modal -->
+    <div id="printModal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50">
+        <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
         
-        // ลำดับ
-        const noCell = document.createElement('td');
-        noCell.textContent = record.No;
-        row.appendChild(noCell);
-        
-        // วันที่
-        const dateCell = document.createElement('td');
-        const date = new Date(record.Date);
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        dateCell.textContent = date.toLocaleDateString('th-TH', options);
-        row.appendChild(dateCell);
-        
-        // ชื่อสื่อ/นวัตกรรม
-        const nameCell = document.createElement('td');
-        nameCell.textContent = record.Name;
-        row.appendChild(nameCell);
-        
-        // ชื่อผู้ผลิตสื่อ
-        const producerCell = document.createElement('td');
-        producerCell.textContent = record.Producer;
-        row.appendChild(producerCell);
-        
-        // จำนวน
-        const amountCell = document.createElement('td');
-        amountCell.textContent = record.Amount;
-        row.appendChild(amountCell);
-        
-        // จุดประสงค์
-        const objectCell = document.createElement('td');
-        objectCell.textContent = record.Object;
-        row.appendChild(objectCell);
-        
-        // ผู้รับรอง
-        const name2Cell = document.createElement('td');
-        name2Cell.textContent = record.Name2;
-        row.appendChild(name2Cell);
-        
-        // จัดการ
-        const actionCell = document.createElement('td');
-        
-        // ปุ่มแก้ไข
-        const editBtn = document.createElement('button');
-        editBtn.className = 'btn btn-sm btn-warning me-1';
-        editBtn.innerHTML = '<i class="bi bi-pencil"></i>';
-        editBtn.title = 'แก้ไข';
-        editBtn.addEventListener('click', function() {
-          openEditModal(record);
+        <div class="modal-container bg-white w-11/12 md:max-w-4xl mx-auto rounded shadow-lg z-50 overflow-y-auto">
+            <div class="modal-content py-4 text-left px-6">
+                <!-- Header -->
+                <div class="flex justify-between items-center pb-3 no-print">
+                    <p class="text-2xl font-bold">พิมพ์รายงาน</p>
+                    <div class="modal-close cursor-pointer z-50">
+                        <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Print Options -->
+                <div class="mb-4 no-print">
+                    <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+                        <div class="flex-1">
+                            <label class="form-label block mb-2">ตั้งแต่วันที่</label>
+                            <input type="date" id="startDate" class="form-input w-full px-4 py-2 rounded-lg">
+                        </div>
+                        <div class="flex-1">
+                            <label class="form-label block mb-2">ถึงวันที่</label>
+                            <input type="date" id="endDate" class="form-input w-full px-4 py-2 rounded-lg">
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-center">
+                        <button id="generateReportBtn" class="btn-primary text-white font-medium py-2 px-6 rounded-lg mr-2">
+                            สร้างรายงาน
+                        </button>
+                        <button id="printBtn" class="btn-secondary text-white font-medium py-2 px-6 rounded-lg">
+                            พิมพ์
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Print Area -->
+                <div id="printArea" class="mt-4">
+                    <div class="print-header">
+                        <h2 class="text-2xl font-bold">รายงานทะเบียนผลิตสื่อและนวัตกรรมการสอน</h2>
+                        <p id="reportDateRange" class="mt-2">วันที่ - ถึง วันที่</p>
+                    </div>
+                    
+                    <table class="print-table min-w-full mt-4">
+                        <thead>
+                            <tr>
+                                <th class="text-left">ที่</th>
+                                <th class="text-left">วันที่ผลิต</th>
+                                <th class="text-left">ชื่อสื่อ/นวัตกรรม</th>
+                                <th class="text-left">ชื่อผู้ผลิต</th>
+                                <th class="text-left">จำนวน</th>
+                                <th class="text-left">จุดประสงค์</th>
+                                <th class="text-left">ผู้รับรอง</th>
+                            </tr>
+                        </thead>
+                        <tbody id="printTableBody">
+                            <tr>
+                                <td colspan="7" class="text-center py-4">ไม่พบข้อมูล</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="mt-8 flex justify-between">
+                        <div>
+                            <p>ลงชื่อ ................................................</p>
+                            <p class="mt-2">(.................................................)</p>
+                            <p class="mt-2">ผู้จัดทำรายงาน</p>
+                        </div>
+                        <div>
+                            <p>ลงชื่อ ................................................</p>
+                            <p class="mt-2">(.................................................)</p>
+                            <p class="mt-2">ผู้รับรองรายงาน</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').value = today;
+            
+            // Navigation
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.section-content');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Hide all sections
+                    sections.forEach(section => section.classList.add('hidden'));
+                    
+                    // Show selected section
+                    const sectionId = this.getAttribute('data-section') + 'Section';
+                    document.getElementById(sectionId).classList.remove('hidden');
+                    
+                    // If reports section is shown, load summary data
+                    if (sectionId === 'reportsSection') {
+                        loadSummaryData();
+                    }
+                });
+            });
+            
+            // Tab navigation
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all tab contents
+                    tabContents.forEach(content => content.classList.add('hidden'));
+                    
+                    // Show selected tab content
+                    const tabId = this.getAttribute('data-tab') + 'Report';
+                    document.getElementById(tabId).classList.remove('hidden');
+                    
+                    // Load specific tab data if needed
+                    if (tabId === 'summaryReport') {
+                        loadSummaryData();
+                    } else if (tabId === 'producerReport') {
+                        loadProducersList();
+                    }
+                });
+            });
+            
+            // Form submission
+            const form = document.getElementById('mediaForm');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const successMessage = document.getElementById('successMessage');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show loading overlay
+                loadingOverlay.classList.remove('hidden');
+                
+                // Get form data
+                const formData = new FormData(form);
+                
+                // Convert FormData to URL encoded string
+                const urlEncodedData = new URLSearchParams(formData).toString();
+                
+                // Send data to Google Apps Script
+                fetch('https://script.google.com/macros/s/AKfycbzzxoyTrL4HPITt4V-mjcAex9zKvvPoi4hYVWRQe6oL0IfgQnSGCJ3FoybGpHac4eG8/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: urlEncodedData,
+                    mode: 'no-cors'
+                })
+                .then(response => {
+                    // Hide loading overlay
+                    loadingOverlay.classList.add('hidden');
+                    
+                    // Show success message
+                    successMessage.classList.add('show');
+                    setTimeout(() => {
+                        successMessage.classList.remove('show');
+                    }, 3000);
+                    
+                    // Reset form
+                    form.reset();
+                    document.getElementById('date').value = today;
+                    
+                    // Refresh data table
+                    fetchRecentData();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    loadingOverlay.classList.add('hidden');
+                    alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล กรุณาลองใหม่อีกครั้ง');
+                });
+            });
+            
+            // Fetch recent data
+            fetchRecentData();
+            
+            function fetchRecentData() {
+                const dataTable = document.getElementById('dataTable');
+                dataTable.innerHTML = '<tr><td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="6">กำลังโหลดข้อมูล...</td></tr>';
+                
+                // Fetch data from Google Sheet
+                fetch('https://script.google.com/macros/s/AKfycbzzxoyTrL4HPITt4V-mjcAex9zKvvPoi4hYVWRQe6oL0IfgQnSGCJ3FoybGpHac4eG8/exec?action=getRecent')
+                .then(response => response.text())
+                .then(data => {
+                    try {
+                        // Parse the data (assuming it's JSON)
+                        const jsonData = JSON.parse(data);
+                        
+                        if (jsonData.length === 0) {
+                            dataTable.innerHTML = '<tr><td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="6">ไม่พบข้อมูล</td></tr>';
+                            return;
+                        }
+                        
+                        // Clear the table
+                        dataTable.innerHTML = '';
+                        
+                        // Add data to the table
+                        jsonData.forEach((row, index) => {
+                            const tr = document.createElement('tr');
+                            tr.className = 'table-row';
+                            
+                            tr.innerHTML = `
+                                <td class="px-6 py-4 whitespace-nowrap">${row.no || index + 1}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">${formatDate(row.date)}</td>
+                                <td class="px-6 py-4">${row.name}</td>
+                                <td class="px-6 py-4">${row.produce}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">${row.amount}</td>
+                                <td class="px-6 py-4">${row.name2}</td>
+                            `;
+                            
+                            dataTable.appendChild(tr);
+                        });
+                        
+                        // Store data for report generation
+                        window.allData = jsonData;
+                        
+                    } catch (e) {
+                        console.error('Error parsing data:', e);
+                        dataTable.innerHTML = '<tr><td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="6">ไม่สามารถโหลดข้อมูลได้</td></tr>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    dataTable.innerHTML = '<tr><td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="6">ไม่สามารถโหลดข้อมูลได้</td></tr>';
+                });
+            }
+            
+            // Load summary data for reports
+            function loadSummaryData() {
+                if (!window.allData) {
+                    return;
+                }
+                
+                const data = window.allData;
+                
+                // Calculate summary statistics
+                const totalMedia = data.length;
+                
+                // Get unique producers
+                const producers = [...new Set(data.map(item => item.produce))];
+                const totalProducers = producers.length;
+                
+                // Calculate total items
+                const totalItems = data.reduce((sum, item) => sum + (parseInt(item.amount) || 0), 0);
+                
+                // Update summary cards
+                document.getElementById('totalMedia').textContent = totalMedia;
+                document.getElementById('totalProducers').textContent = totalProducers;
+                document.getElementById('totalItems').textContent = totalItems;
+                
+                // Update latest media table (show top 5)
+                const latestMediaTable = document.getElementById('latestMediaTable');
+                latestMediaTable.innerHTML = '';
+                
+                // Sort by date (newest first) and take top 5
+                const latestMedia = [...data]
+                    .sort((a, b) => new Date(b.date) - new Date(a.date))
+                    .slice(0, 5);
+                
+                if (latestMedia.length === 0) {
+                    latestMediaTable.innerHTML = '<tr><td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="4">ไม่พบข้อมูล</td></tr>';
+                    return;
+                }
+                
+                latestMedia.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'table-row';
+                    
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap">${formatDate(row.date)}</td>
+                        <td class="px-6 py-4">${row.name}</td>
+                        <td class="px-6 py-4">${row.produce}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${row.amount}</td>
+                    `;
+                    
+                    latestMediaTable.appendChild(tr);
+                });
+            }
+            
+            // Load producers list for producer report
+            function loadProducersList() {
+                if (!window.allData) {
+                    return;
+                }
+                
+                const data = window.allData;
+                
+                // Get unique producers
+                const producers = [...new Set(data.map(item => item.produce))];
+                
+                // Update producer select
+                const producerSelect = document.getElementById('producerSelect');
+                
+                // Clear existing options except the first one
+                while (producerSelect.options.length > 1) {
+                    producerSelect.remove(1);
+                }
+                
+                // Add producer options
+                producers.forEach(producer => {
+                    const option = document.createElement('option');
+                    option.value = producer;
+                    option.textContent = producer;
+                    producerSelect.appendChild(option);
+                });
+            }
+            
+            // Generate monthly report
+            document.getElementById('generateMonthlyBtn').addEventListener('click', function() {
+                if (!window.allData) {
+                    return;
+                }
+                
+                const month = parseInt(document.getElementById('monthSelect').value);
+                const year = parseInt(document.getElementById('yearSelect').value);
+                
+                // Filter data by month and year
+                const filteredData = window.allData.filter(item => {
+                    const date = new Date(item.date);
+                    return date.getMonth() + 1 === month && date.getFullYear() === year;
+                });
+                
+                // Update month/year title
+                const monthNames = [
+                    'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
+                    'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'
+                ];
+                document.getElementById('monthYearTitle').textContent = `${monthNames[month - 1]} ${year}`;
+                
+                // Calculate summary statistics
+                const monthlyTotalMedia = filteredData.length;
+                
+                // Get unique producers
+                const producers = [...new Set(filteredData.map(item => item.produce))];
+                const monthlyTotalProducers = producers.length;
+                
+                // Calculate total items
+                const monthlyTotalItems = filteredData.reduce((sum, item) => sum + (parseInt(item.amount) || 0), 0);
+                
+                // Update summary cards
+                document.getElementById('monthlyTotalMedia').textContent = monthlyTotalMedia;
+                document.getElementById('monthlyTotalProducers').textContent = monthlyTotalProducers;
+                document.getElementById('monthlyTotalItems').textContent = monthlyTotalItems;
+                
+                // Update monthly data table
+                const monthlyDataTable = document.getElementById('monthlyDataTable');
+                monthlyDataTable.innerHTML = '';
+                
+                if (filteredData.length === 0) {
+                    monthlyDataTable.innerHTML = '<tr><td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="6">ไม่พบข้อมูลในเดือนที่เลือก</td></tr>';
+                    return;
+                }
+                
+                filteredData.forEach((row, index) => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'table-row';
+                    
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap">${index + 1}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${formatDate(row.date)}</td>
+                        <td class="px-6 py-4">${row.name}</td>
+                        <td class="px-6 py-4">${row.produce}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${row.amount}</td>
+                        <td class="px-6 py-4">${row.name2}</td>
+                    `;
+                    
+                    monthlyDataTable.appendChild(tr);
+                });
+            });
+            
+            // Generate producer report
+            document.getElementById('generateProducerBtn').addEventListener('click', function() {
+                if (!window.allData) {
+                    return;
+                }
+                
+                const producer = document.getElementById('producerSelect').value;
+                
+                if (!producer) {
+                    alert('กรุณาเลือกผู้ผลิต');
+                    return;
+                }
+                
+                // Filter data by producer
+                const filteredData = window.allData.filter(item => item.produce === producer);
+                
+                // Update producer name
+                document.getElementById('producerName').textContent = producer;
+                
+                // Calculate summary statistics
+                const producerTotalMedia = filteredData.length;
+                
+                // Calculate total items
+                const producerTotalItems = filteredData.reduce((sum, item) => sum + (parseInt(item.amount) || 0), 0);
+                
+                // Update summary cards
+                document.getElementById('producerTotalMedia').textContent = producerTotalMedia;
+                document.getElementById('producerTotalItems').textContent = producerTotalItems;
+                
+                // Update producer data table
+                const producerDataTable = document.getElementById('producerDataTable');
+                producerDataTable.innerHTML = '';
+                
+                if (filteredData.length === 0) {
+                    producerDataTable.innerHTML = '<tr><td class="px-6 py-4 whitespace-nowrap text-center text-gray-500" colspan="6">ไม่พบข้อมูลของผู้ผลิตที่เลือก</td></tr>';
+                    return;
+                }
+                
+                filteredData.forEach((row, index) => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'table-row';
+                    
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap">${index + 1}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${formatDate(row.date)}</td>
+                        <td class="px-6 py-4">${row.name}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${row.amount}</td>
+                        <td class="px-6 py-4">${row.object || '-'}</td>
+                        <td class="px-6 py-4">${row.name2}</td>
+                    `;
+                    
+                    producerDataTable.appendChild(tr);
+                });
+            });
+            
+            // Print report buttons
+            document.getElementById('printSummaryBtn').addEventListener('click', function() {
+                window.print();
+            });
+            
+            document.getElementById('printMonthlyBtn').addEventListener('click', function() {
+                window.print();
+            });
+            
+            document.getElementById('printProducerBtn').addEventListener('click', function() {
+                window.print();
+            });
+            
+            // Print Report Modal
+            const modal = document.getElementById('printModal');
+            const printReportBtn = document.getElementById('printReportBtn');
+            const closeModal = document.querySelector('.modal-close');
+            const generateReportBtn = document.getElementById('generateReportBtn');
+            const printBtn = document.getElementById('printBtn');
+            const startDateInput = document.getElementById('startDate');
+            const endDateInput = document.getElementById('endDate');
+            
+            // Set default date range (last 30 days)
+            const endDate = new Date();
+            const startDate = new Date();
+            startDate.setDate(startDate.getDate() - 30);
+            
+            startDateInput.value = startDate.toISOString().split('T')[0];
+            endDateInput.value = endDate.toISOString().split('T')[0];
+            
+            // Open modal
+            printReportBtn.addEventListener('click', function() {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                generateReport();
+            });
+            
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.add('opacity-0', 'pointer-events-none');
+                }
+            });
+            
+            // Generate report
+            generateReportBtn.addEventListener('click', generateReport);
+            
+            function generateReport() {
+                const startDate = new Date(startDateInput.value);
+                const endDate = new Date(endDateInput.value);
+                endDate.setHours(23, 59, 59); // Set to end of day
+                
+                // Update date range text
+                document.getElementById('reportDateRange').textContent = 
+                    `วันที่ ${formatDate(startDate)} ถึง ${formatDate(endDate)}`;
+                
+                // Filter data by date range
+                const filteredData = window.allData ? window.allData.filter(item => {
+                    const itemDate = new Date(item.date);
+                    return itemDate >= startDate && itemDate <= endDate;
+                }) : [];
+                
+                // Update table
+                const printTableBody = document.getElementById('printTableBody');
+                
+                if (filteredData.length === 0) {
+                    printTableBody.innerHTML = '<tr><td colspan="7" class="text-center py-4">ไม่พบข้อมูลในช่วงเวลาที่เลือก</td></tr>';
+                    return;
+                }
+                
+                printTableBody.innerHTML = '';
+                
+                filteredData.forEach((row, index) => {
+                    const tr = document.createElement('tr');
+                    
+                    tr.innerHTML = `
+                        <td>${row.no || index + 1}</td>
+                        <td>${formatDate(row.date)}</td>
+                        <td>${row.name}</td>
+                        <td>${row.produce}</td>
+                        <td>${row.amount}</td>
+                        <td>${row.object || '-'}</td>
+                        <td>${row.name2}</td>
+                    `;
+                    
+                    printTableBody.appendChild(tr);
+                });
+            }
+            
+            // Print report
+            printBtn.addEventListener('click', function() {
+                window.print();
+            });
+            
+            // Helper function to format date
+            function formatDate(dateString) {
+                if (!dateString) return '';
+                
+                try {
+                    const date = new Date(dateString);
+                    return date.toLocaleDateString('th-TH', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                } catch (e) {
+                    return dateString;
+                }
+            }
+            
+            // Set current year in select
+            const currentYear = new Date().getFullYear();
+            const yearSelect = document.getElementById('yearSelect');
+            for (let i = 0; i < yearSelect.options.length; i++) {
+                if (parseInt(yearSelect.options[i].value) === currentYear) {
+                    yearSelect.selectedIndex = i;
+                    break;
+                }
+            }
+            
+            // Set current month in select
+            const currentMonth = new Date().getMonth() + 1;
+            document.getElementById('monthSelect').value = currentMonth;
         });
-        actionCell.appendChild(editBtn);
-        
-        // ปุ่มลบ
-        const deleteBtn = document.createElement('button');
-        deleteBtn.className = 'btn btn-sm btn-danger';
-        deleteBtn.innerHTML = '<i class="bi bi-trash"></i>';
-        deleteBtn.title = 'ลบ';
-        deleteBtn.addEventListener('click', function() {
-          openDeleteModal(record);
-        });
-        actionCell.appendChild(deleteBtn);
-        
-        row.appendChild(actionCell);
-        
-        tableBody.appendChild(row);
-      });
-    }
-    
-    // เพิ่มข้อมูล
-    function addRecord() {
-      const form = document.getElementById('addForm');
-      const formData = {
-        name: form.elements.name.value,
-        producer: form.elements.producer.value,
-        amount: form.elements.amount.value,
-        object: form.elements.object.value,
-        name2: form.elements.name2.value,
-        action: 'create'
-      };
-      
-      google.script.run
-        .withSuccessHandler(function(response) {
-          if (response.success) {
-            alert('เพิ่มข้อมูลสำเร็จ');
-            form.reset();
-            loadAllData();
-          } else {
-            alert('เกิดข้อผิดพลาด: ' + response.message);
-          }
-        })
-        .doPost(formData);
-    }
-    
-    // เปิด Modal แก้ไขข้อมูล
-    function openEditModal(record) {
-      document.getElementById('editRecordId').value = record.No;
-      document.getElementById('editName').value = record.Name;
-      document.getElementById('editProducer').value = record.Producer;
-      document.getElementById('editAmount').value = record.Amount;
-      document.getElementById('editObject').value = record.Object;
-      document.getElementById('editName2').value = record.Name2;
-      
-      const editModal = new bootstrap.Modal(document.getElementById('editModal'));
-      editModal.show();
-    }
-    
-    // แก้ไขข้อมูล
-    function updateRecord() {
-      const form = document.getElementById('editForm');
-      const formData = {
-        recordId: form.elements.recordId.value,
-        name: form.elements.name.value,
-        producer: form.elements.producer.value,
-        amount: form.elements.amount.value,
-        object: form.elements.object.value,
-        name2: form.elements.name2.value,
-        action: 'update'
-      };
-      
-      google.script.run
-        .withSuccessHandler(function(response) {
-          if (response.success) {
-            alert('แก้ไขข้อมูลสำเร็จ');
-            const editModal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
-            editModal.hide();
-            loadAllData();
-          } else {
-            alert('เกิดข้อผิดพลาด: ' + response.message);
-          }
-        })
-        .doPost(formData);
-    }
-    
-    // เปิด Modal ยืนยันการลบ
-    function openDeleteModal(record) {
-      deleteRecordId = record.No;
-      document.getElementById('deleteRecordInfo').textContent = 'ชื่อสื่อ/นวัตกรรม: ' + record.Name;
-      
-      const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-      deleteModal.show();
-    }
-    
-    // ลบข้อมูล
-    function deleteRecord() {
-      const formData = {
-        recordId: deleteRecordId,
-        action: 'delete'
-      };
-      
-      google.script.run
-        .withSuccessHandler(function(response) {
-          if (response.success) {
-            alert('ลบข้อมูลสำเร็จ');
-            const deleteModal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
-            deleteModal.hide();
-            loadAllData();
-          } else {
-            alert('เกิดข้อผิดพลาด: ' + response.message);
-          }
-        })
-        .doPost(formData);
-    }
-    
-    // ฟังก์ชันสำหรับหน้ารายงาน
-    
-    // ตั้งค่าวันที่รายงาน
-    function setReportDate() {
-      const now = new Date();
-      const options = { year: 'numeric', month: 'long', day: 'numeric' };
-      document.getElementById('reportDate').textContent = 'วันที่พิมพ์: ' + now.toLocaleDateString('th-TH', options);
-    }
-
-    // โหลดรายชื่อผู้ผลิตสื่อ
-    function loadProducers() {
-      google.script.run
-        .withSuccessHandler(function(response) {
-          if (response.success) {
-            producers = response.producers;
-            populateProducerFilter();
-          } else {
-            alert('เกิดข้อผิดพลาด: ' + response.message);
-          }
-        })
-        .getProducerList();
-    }
-
-    // เติมข้อมูลในตัวเลือกผู้ผลิตสื่อ
-    function populateProducerFilter() {
-      const select = document.getElementById('producerFilter');
-      select.innerHTML = '<option value="">-- เลือกผู้ผลิตสื่อ --</option>';
-      
-      producers.forEach(function(producer) {
-        const option = document.createElement('option');
-        option.value = producer;
-        option.textContent = producer;
-        select.appendChild(option);
-      });
-    }
-
-    // แสดง/ซ่อนตัวเลือกผู้ผลิตสื่อตามประเภทรายงาน
-    function toggleProducerFilter() {
-      const producerFilterContainer = document.getElementById('producerFilterContainer');
-      const summaryReportContainer = document.getElementById('summaryReportContainer');
-      
-      if (currentReportType === 'byProducer') {
-        producerFilterContainer.style.display = 'block';
-        summaryReportContainer.style.display = 'none';
-      } else if (currentReportType === 'summary') {
-        producerFilterContainer.style.display = 'none';
-        summaryReportContainer.style.display = 'block';
-      } else {
-        producerFilterContainer.style.display = 'none';
-        summaryReportContainer.style.display = 'none';
-      }
-    }
-
-    // สร้างรายงาน
-    function generateReport() {
-      // ตรวจสอบประเภทรายงาน
-      if (currentReportType === 'all') {
-        loadAllRecordsForReport();
-      } else if (currentReportType === 'byProducer') {
-        selectedProducer = document.getElementById('producerFilter').value;
-        if (!selectedProducer) {
-          alert('กรุณาเลือกผู้ผลิตสื่อ');
-          return;
-        }
-        loadRecordsByProducer(selectedProducer);
-      } else if (currentReportType === 'summary') {
-        loadProducerSummary();
-      }
-    }
-
-    // โหลดข้อมูลทั้งหมดสำหรับรายงาน
-    function loadAllRecordsForReport() {
-      document.getElementById('reportSubtitle').textContent = 'รายงานทั้งหมด';
-      document.getElementById('summaryReportContainer').style.display = 'none';
-      
-      google.script.run
-        .withSuccessHandler(function(response) {
-          if (response.success) {
-            displayRecordsInReport(response.records);
-            displaySummary(response.records.length, calculateTotalAmount(response.records));
-          } else {
-            alert('เกิดข้อผิดพลาด: ' + response.message);
-          }
-        })
-        .getAllRecords();
-    }
-
-    // โหลดข้อมูลตามผู้ผลิตสื่อ
-    function loadRecordsByProducer(producer) {
-      document.getElementById('reportSubtitle').textContent = 'รายงานแยกตามผู้ผลิตสื่อ: ' + producer;
-      document.getElementById('summaryReportContainer').style.display = 'none';
-      
-      google.script.run
-        .withSuccessHandler(function(response) {
-          if (response.success) {
-            displayRecordsInReport(response.records);
-            displaySummary(response.summary.totalRecords, response.summary.totalAmount);
-          } else {
-            alert('เกิดข้อผิดพลาด: ' + response.message);
-          }
-        })
-        .withUserObject(this)
-        .getRecordsByProducer({producer: producer});
-    }
-
-    // โหลดข้อมูลสรุปตามผู้ผลิตสื่อ
-    function loadProducerSummary() {
-      document.getElementById('reportSubtitle').textContent = 'รายงานสรุปตามผู้ผลิตสื่อ';
-      document.getElementById('reportTableBody').innerHTML = '';
-      document.getElementById('reportSummary').innerHTML = '';
-      document.getElementById('summaryReportContainer').style.display = 'block';
-      
-      google.script.run
-        .withSuccessHandler(function(response) {
-          if (response.success) {
-            displaySummaryReport(response.summary);
-          } else {
-            alert('เกิดข้อผิดพลาด: ' + response.message);
-          }
-        })
-        .getProducerSummary();
-    }
-
-    // แสดงข้อมูลในตารางรายงาน
-    function displayRecordsInReport(records) {
-      const tableBody = document.getElementById('reportTableBody');
-      tableBody.innerHTML = '';
-      
-      if (records.length === 0) {
-        const row = document.createElement('tr');
-        const cell = document.createElement('td');
-        cell.colSpan = 7;
-        cell.textContent = 'ไม่พบข้อมูล';
-        cell.style.textAlign = 'center';
-        row.appendChild(cell);
-        tableBody.appendChild(row);
-        return;
-      }
-      
-      records.forEach(function(record, index) {
-        const row = document.createElement('tr');
-        
-        // ลำดับ
-        const noCell = document.createElement('td');
-        noCell.textContent = index + 1;
-        row.appendChild(noCell);
-        
-        // วันที่
-        const dateCell = document.createElement('td');
-        const date = new Date(record.Date);
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        dateCell.textContent = date.toLocaleDateString('th-TH', options);
-        row.appendChild(dateCell);
-        
-        // ชื่อสื่อ/นวัตกรรม
-        const nameCell = document.createElement('td');
-        nameCell.textContent = record.Name;
-        row.appendChild(nameCell);
-        
-        // ชื่อผู้ผลิตสื่อ
-        const producerCell = document.createElement('td');
-        producerCell.textContent = record.Producer;
-        row.appendChild(producerCell);
-        
-        // จำนวน
-        const amountCell = document.createElement('td');
-        amountCell.textContent = record.Amount;
-        amountCell.style.textAlign = 'center';
-        row.appendChild(amountCell);
-        
-        // จุดประสงค์
-        const objectCell = document.createElement('td');
-        objectCell.textContent = record.Object;
-        row.appendChild(objectCell);
-        
-        // ผู้รับรอง
-        const name2Cell = document.createElement('td');
-        name2Cell.textContent = record.Name2;
-        row.appendChild(name2Cell);
-        
-        tableBody.appendChild(row);
-      });
-    }
-
-    // แสดงข้อมูลสรุป
-    function displaySummary(totalRecords, totalAmount) {
-      const summaryContainer = document.getElementById('reportSummary');
-      summaryContainer.innerHTML = `
-        <div class="row">
-          <div class="col-md-6">
-            <p><strong>จำนวนรายการทั้งหมด:</strong> ${totalRecords} รายการ</p>
-          </div>
-          <div class="col-md-6">
-            <p><strong>จำนวนรวมทั้งหมด:</strong> ${totalAmount} ชิ้น</p>
-          </div>
-        </div>
-      `;
-    }
-
-    // แสดงรายงานสรุปตามผู้ผลิตสื่อ
-    function displaySummaryReport(summaryData) {
-      const tableBody = document.getElementById('summaryTableBody');
-      tableBody.innerHTML = '';
-      
-      if (summaryData.length === 0) {
-        const row = document.createElement('tr');
-        const cell = document.createElement('td');
-        cell.colSpan = 4;
-        cell.textContent = 'ไม่พบข้อมูล';
-        cell.style.textAlign = 'center';
-        row.appendChild(cell);
-        tableBody.appendChild(row);
-        return;
-      }
-      
-      let totalRecords = 0;
-      let totalAmount = 0;
-      
-      summaryData.forEach(function(item, index) {
-        const row = document.createElement('tr');
-        
-        // ลำดับ
-        const noCell = document.createElement('td');
-        noCell.textContent = index + 1;
-        row.appendChild(noCell);
-        
-        // ชื่อผู้ผลิตสื่อ
-        const producerCell = document.createElement('td');
-        producerCell.textContent = item.producer;
-        row.appendChild(producerCell);
-        
-        // จำนวนรายการ
-        const countCell = document.createElement('td');
-        countCell.textContent = item.count;
-        countCell.style.textAlign = 'center';
-        row.appendChild(countCell);
-        
-        // จำนวนรวม
-        const amountCell = document.createElement('td');
-        amountCell.textContent = item.totalAmount;
-        amountCell.style.textAlign = 'center';
-        row.appendChild(amountCell);
-        
-        tableBody.appendChild(row);
-        
-        totalRecords += item.count;
-        totalAmount += item.totalAmount;
-      });
-      
-      // เพิ่มแถวสรุปรวม
-      const summaryRow = document.createElement('tr');
-      summaryRow.style.fontWeight = 'bold';
-      
-      const summaryLabelCell = document.createElement('td');
-      summaryLabelCell.colSpan = 2;
-      summaryLabelCell.textContent = 'รวมทั้งหมด';
-      summaryLabelCell.style.textAlign = 'right';
-      summaryRow.appendChild(summaryLabelCell);
-      
-      const totalRecordsCell = document.createElement('td');
-      totalRecordsCell.textContent = totalRecords;
-      totalRecordsCell.style.textAlign = 'center';
-      summaryRow.appendChild(totalRecordsCell);
-      
-      const totalAmountCell = document.createElement('td');
-      totalAmountCell.textContent = totalAmount;
-      totalAmountCell.style.textAlign = 'center';
-      summaryRow.appendChild(totalAmountCell);
-      
-      tableBody.appendChild(summaryRow);
-    }
-
-    // คำนวณจำนวนรวม
-    function calculateTotalAmount(records) {
-      let total = 0;
-      records.forEach(function(record) {
-        total += parseInt(record.Amount) || 0;
-      });
-      return total;
-    }
-  </script>
-</body>
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94c81c8704959102',t:'MTc0OTM4Mjc5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
